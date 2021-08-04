@@ -8,10 +8,10 @@
                         <div class="right-menu">
                             <div class="is-flex">
                                 <i-icon-svg class="svg-icon"/>
-                                <div class="menu-text">Help</div>
+                                <router-link to="" class="menu-text">Help</router-link>
                             </div>
-                            <div class="is-flex">
-                                <div class="menu-text"> Ga naar www.argenta.be </div>
+                            <div class="is-flex move-icon">
+                                <router-link to="" class="menu-text"> Ga naar www.argenta.be </router-link>
                                 <right-arrow-svg class="svg-icon"/>
                             </div>
                             <div class="is-flex">
@@ -22,9 +22,10 @@
                     </div>
                     <h1 class="title"> Aanmelden op internetbankieren </h1>
                     <div class="main-content">
-                        <div>
-                            <phone-input></phone-input>
-                        </div>
+                        <phone-input></phone-input>
+                        <div class="divider"></div>
+                        <info-component></info-component>
+                        <footer-component></footer-component>
                     </div>
                 </div>
             </div>
@@ -40,9 +41,11 @@ import IIconSvg from "../components/icons/iIconSvg";
 import RightArrowSvg from "../components/icons/rightArrowSvg";
 import DownArrowSvg from "../components/icons/downArrowSvg";
 import PhoneInput from "../components/PhoneInput";
+import InfoComponent from "../components/InfoComponent";
+import FooterComponent from "../components/FooterComponent";
 export default {
     name: 'Home',
-    components: {PhoneInput, DownArrowSvg, RightArrowSvg, IIconSvg, LogoSvg},
+    components: {FooterComponent, InfoComponent, PhoneInput, DownArrowSvg, RightArrowSvg, IIconSvg, LogoSvg},
 }
 </script>
 <style scoped lang="scss">
@@ -62,6 +65,23 @@ export default {
                     .right-menu{
                         display: flex;
                         align-items: center;
+                        .move-icon{
+                            position: relative;
+                            padding-right: 20px;
+                            margin-top: -3px;
+                            .menu-text{
+                                margin-right: 15px;
+                            }
+                            .svg-icon{
+                                position: absolute;
+                                right: 10px;
+                            }
+                            &:hover{
+                                .svg-icon{
+                                    right: 0;
+                                }
+                            }
+                        }
                         & > div{
                             border-right: 0.5px solid #eaeaea;
                             padding: 0 10px;
@@ -74,6 +94,9 @@ export default {
                                 color: #00a160;
                                 font-weight: 700;
                                 font-size: 14px;
+                                &:hover{
+                                    border-bottom: 1px solid;
+                                }
                             }
                             &:last-child{
                                 font-weight: normal;
@@ -84,10 +107,16 @@ export default {
                                     font-size: 12px;
                                     font-weight: normal;
                                     color: #AAAAAA;
+                                    &:hover{
+                                        border-bottom: none;
+                                    }
                                 }
                                 .svg-icon{
                                     width: 12px;
                                     margin: 2px 5px;
+                                }
+                                &:hover{
+                                    cursor: pointer;
                                 }
                             }
                         }
@@ -99,6 +128,10 @@ export default {
                     color: #333;
                 }
                 .main-content{
+                    .divider{
+                        border-bottom: 1px solid #eaeaea;
+                        margin: 24px 0;
+                    }
 
                 }
             }
@@ -107,6 +140,8 @@ export default {
             background-image: url("../../public/images/homebankbg.jpeg");
             background-size: cover;
             height: 100vh;
+            position: sticky;
+            top: 0;
         }
     }
     .d-flex{

@@ -1,0 +1,42 @@
+.form-area{
+    & > div{
+        p{
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        & > div{
+            width: 50%;
+            input{
+                border: 1px solid #eaeaea;
+                border-radius: 0;
+                padding: 8px 0 8px 16px;
+                box-shadow: none;
+                min-height: 50px;
+            }
+        }
+    }
+}
+.checkbox-area{
+    & > div{
+        & > label{
+            .check{
+                border-radius: 0 !important;
+            }
+        }
+    }
+}
+.info-component{
+    .svg-icon{
+        svg.svg-inline--fa.fa-chevron-circle-right{
+            color: #00a160 !important;
+        }
+    }
+}
+.infos{
+    .svg-icon{
+        svg.svg-inline--fa.fa-chevron-circle-right{
+            color: #666666 !important;
+        }
+    }
+}
