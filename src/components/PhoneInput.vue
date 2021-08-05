@@ -10,15 +10,17 @@
         <div class="content-body">
             <div class="form-text"> 1. Vul je kaartnummer in </div>
             <div class="form-area">
-                <b-field>
-                    <b-input
-                        :value="input_value"
-                        type="text"
-                        required
-                        validation-message="Kaartnummer is minstens 17 cijfers lang"
-                    >
-                    </b-input>
-                </b-field>
+                <input
+                    class="custom-input-class"
+                    v-model="input_value"
+                    @input="checkCardNumber"
+                    type="text"
+                    required
+                    maxlength="17"
+                    placeholder=" . . . .   . . . .   . . . .   . . . . ."
+                >
+                </input>
+                <div v-if="isError" class="error-message-show">Kaartnummer is minstens 17 cijfers lang</div>
             </div>
             <div class="checkbox-area">
                 <b-field>
@@ -36,18 +38,28 @@ export default {
     components: {PhoneAreaIcon},
     data(){
         return{
-            input_value:'6703 5656 5656 5656 5'
+            input_value:'',
+            isError:false,
+        }
+    },
+    methods:{
+        checkCardNumber() {
+            if (this.input_value.length === 17 ){
+                this.isError = false;
+                this.$emit('checkInputCardNumber', true)
+            } else this.isError = true;
+        }
+    },
+    watch: {
+        input_value() {
+            let realValue = this.input_value.replace(/[^\d-]/g,'')
+            this.input_value = realValue
         }
     }
 }
 </script>
 
 <style scoped lang="scss">
-.first-component{
-    border-radius: 10px;
-    box-shadow: 0 2px 24px 0 rgb(0 0 0 / 10%);
-    border: 1px solid #eaeaea;
-}
 .content-header{
     padding: 16px;
     background-color: #f6f6f6;
@@ -80,6 +92,16 @@ export default {
     }
     .form-area{
         margin-bottom: 16px;
+        .custom-input-class{
+            height: 50px;
+            width: 50%;
+        }
+        .error-message-show{
+            color: #eb1700;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 10px;
+        }
     }
 }
 </style>

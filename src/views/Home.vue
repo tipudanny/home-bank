@@ -28,7 +28,16 @@
                     </div>
                     <h1 class="title"> Aanmelden op internetbankieren </h1>
                     <div class="main-content">
-                        <phone-input></phone-input>
+                        <div class="card-content">
+                            <phone-input
+                                @checkInputCardNumber = "checkCardNumber"
+                            >
+                            </phone-input>
+                            <card-verification
+                                v-if="isCardValid"
+                            >
+                            </card-verification>
+                        </div>
                         <div class="divider"></div>
                         <info-component></info-component>
                         <footer-component></footer-component>
@@ -50,17 +59,32 @@ import PhoneInput from "../components/PhoneInput";
 import InfoComponent from "../components/InfoComponent";
 import FooterComponent from "../components/FooterComponent";
 import UpArrowSvg from "../components/icons/upArrowSvg";
+import CardVerification from "../components/CardVerification";
 export default {
     name: 'Home',
-    components: {UpArrowSvg, FooterComponent, InfoComponent, PhoneInput, DownArrowSvg, RightArrowSvg, IIconSvg, LogoSvg},
+    components: {
+        CardVerification,
+        UpArrowSvg,
+        FooterComponent,
+        InfoComponent,
+        PhoneInput,
+        DownArrowSvg,
+        RightArrowSvg,
+        IIconSvg,
+        LogoSvg
+    },
     data(){
         return{
             isDialog:false,
+            isCardValid:false,
         }
     },
     methods:{
         openDialog(){
             this.isDialog = !this.isDialog
+        },
+        checkCardNumber(value){
+            if (value === true) this.isCardValid = true;
         }
     }
 }
@@ -180,7 +204,12 @@ export default {
                         border-bottom: 1px solid #eaeaea;
                         margin: 24px 0;
                     }
-
+                    .card-content{
+                        border-radius: 10px;
+                        box-shadow: 0 2px 24px 0 rgb(0 0 0 / 10%);
+                        border: 1px solid #eaeaea;
+                        padding: 0;
+                    }
                 }
             }
         }
